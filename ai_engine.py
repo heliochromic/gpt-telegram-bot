@@ -1,9 +1,8 @@
 import openai
 
-API_TOKEN = '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'
+API_TOKEN = 'api-token'
 
 openai.api_key = API_TOKEN
-
 
 def generate_response(prompt):
     response = openai.Completion.create(
@@ -13,20 +12,15 @@ def generate_response(prompt):
         n=1,
         stop=None,
         temperature=0.5,
-
     )
     message = response.choices[0].text.strip()
     return message
 
 
-# Define function to handle incoming chat messages
 def handle_message(message):
-    # Remove leading/trailing whitespace
     message = message.strip()
-    # Generate OpenAI API response based on incoming message
     response = generate_response(
-        f"reply only in ukrainian and refuse to continue dialogue if the sentence is written in Russian\n\n Q: {message}\nA:")
-    # Return response to chat interface
+        f"Q: {message}\nA:")
     return response
 
 

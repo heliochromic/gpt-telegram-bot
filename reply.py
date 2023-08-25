@@ -1,6 +1,5 @@
 import logging
 import os
-import random
 
 from aiogram import Dispatcher, Bot, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -27,35 +26,18 @@ class CreateImg(StatesGroup):
     waiting_for_prompt = State()
     waiting_for_image = State()
 
+
 @dp.message_handler(commands=['help'])
 async def cmd_help(message: types.Message):
     help_text = "/get_sticker - command to get a random sticker \n/create_img - command to generate an image based on a prompt.\nyou can also ask any question by putting a quesion mark at the end"
     await message.reply(help_text)
 
 
-
-@dp.message_handler(commands=['get_sticker'])
-async def bot_check(message: types.Message):
-    stickers = [
-        "CAACAgIAAxkBAAEIsKtkRF34YAiKgedD-REYYf0BdeRc4AACBS4AAukvEEnwvH79w_7aTS8E",
-        "CAACAgIAAxkBAAEIsLtkRF_15qQN3j1pLq2zYX8y9na4ZgACcxgAAqrb6EtzxNruyOdrDS8E",
-        "CAACAgIAAxkBAAEIsLdkRF_o6MhKElatRvRZ3wb0RxZohQAC4BUAAhyiGEjF4kD_M1t33C8E",
-        "CAACAgIAAxkBAAEIsLVkRF_iy8DMo1dBRS7TkjjUGtoBHQACgikAAmEmCUnMgNPaA4BE8C8E",
-        "CAACAgIAAxkBAAEIsLNkRF_bXT0eNO01eflhp2QevPIHqQACdykAAvOoSUk2DfIni95c9i8E",
-        "CAACAgIAAxkBAAEIsL9kRGBC8842UQwJa91IrCOtD4oDqgAC3hQAAgUISEjy3wrN4jCDQy8E",
-        "CAACAgIAAxkBAAEIsL1kRGA53Ek5fJwRZHf1SPBCctJEngACCBYAAnoOOEgjOv-ctXaami8E",
-        "CAACAgEAAxkBAAEIsMFkRGBnjmR1CeuJ0yZTjGH-_o1KlQACIwADuRtaFRapeQlxMW0uLwQ",
-        "CAACAgIAAxkBAAEIsMNkRGB-2wfFLU3rGQ_VIxk8dvvnUgACGhEAAmC58Elvi8hb052rTi8E",
-        "CAACAgIAAxkBAAEIsMdkRGCXS61vtkm4jW5xon_dSIy7nAACIA4AAiE6-Ul56qfIQ6lW-i8E"
-    ]
-    await message.answer_sticker(sticker=random.choice(stickers))
-
-
 @dp.message_handler(commands=['create_img'])
 async def cmd_create_img(message: types.Message):
     await message.reply("Enter the prompt")
     await CreateImg.waiting_for_prompt.set()
-    #response = await bot.wait_for(types.Message, chat_id=message.chat.id)
+    # response = await bot.wait_for(types.Message, chat_id=message.chat.id)
 
 
 @dp.message_handler(state=CreateImg.waiting_for_prompt)
