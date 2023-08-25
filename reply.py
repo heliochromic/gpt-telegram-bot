@@ -10,7 +10,7 @@ from aiogram.utils import executor
 
 import ai_engine
 
-os.environ['TELEGRAM_API_TOKEN'] = '6218436341:AAFW8Zu-PZ2KNLypWJ1-4EQL3lBJix0h4Vc'
+os.environ['TELEGRAM_API_TOKEN'] = 'api-token'
 API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')
 
 # Configure logging
